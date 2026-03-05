@@ -9,11 +9,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme myColor = ColorScheme.fromSeed(seedColor: Colors.green);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        colorScheme: myColor,
         useMaterial3: true,
+        appBarTheme: AppBarTheme(
+          backgroundColor: myColor.primary,
+          foregroundColor: myColor.onPrimary,
+        ),
       ),
       home: MyHome(),
     );
@@ -28,6 +33,13 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,17 +52,21 @@ class _MyHomeState extends State<MyHome> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.deepOrangeAccent,
+        // backgroundColor: Colors.orangeAccent,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.flutter_dash, size: 80, color: Colors.blue),
+            const Icon(Icons.flutter_dash, size: 80, color: Colors.green),
             const SizedBox(height: 16),
             const Text(
               'Flutter is awesome!',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
             ),
             const Text(
               'Week 1 - Getting Started',
@@ -58,6 +74,24 @@ class _MyHomeState extends State<MyHome> {
             ),
           ],
         ),
+      ),
+      backgroundColor: Colors.grey[300],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+          ),
+
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
       ),
     );
   }
