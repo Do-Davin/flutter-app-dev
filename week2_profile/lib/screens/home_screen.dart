@@ -6,6 +6,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -19,6 +20,13 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
       ),
       body: Center(child: InteractiveStudentCard()),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'PROFILE'),
+        ],
+      ),
     );
   }
 }

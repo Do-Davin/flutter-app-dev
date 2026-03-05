@@ -13,18 +13,25 @@ class _InteractiveStudentCardState extends State<InteractiveStudentCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 6,
+      elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: const AssetImage('assets/images/davin.jpg'),
+            ClipOval(
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: Image.asset(
+                  'assets/images/davin.jpg',
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
+              ),
             ),
+
             const SizedBox(height: 16),
 
             const Text(
@@ -46,7 +53,7 @@ class _InteractiveStudentCardState extends State<InteractiveStudentCard> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
               onPressed: () {
