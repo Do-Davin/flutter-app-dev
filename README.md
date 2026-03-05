@@ -1,1 +1,5 @@
-# flutter-app-dev
+# Mobile App Development LAB
+
+<div align="center">
+![Flutter](https://img.shields.io/badge/Flutter-0d1117?style=flat-square&logo=flutter&logoColor=02569B)
+<div>
