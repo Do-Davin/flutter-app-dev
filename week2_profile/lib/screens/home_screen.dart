@@ -1,31 +1,41 @@
+import 'package:dev_icons/dev_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:week2_profile/widgets/student_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Student Profile',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(DevIcons.flutterPlain, size: 80, color: Colors.blue),
+            SizedBox(height: 16),
+            Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            SizedBox(height: 6),
+            Text(
+              'This is the Home Screen',
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+          ],
         ),
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: Center(child: InteractiveStudentCard()),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'PROFILE'),
-        ],
       ),
     );
   }
