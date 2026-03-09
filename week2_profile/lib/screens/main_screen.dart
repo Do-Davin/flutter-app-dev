@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
   final List<Widget> screens = [HomeScreen(), ProfileScreen()];
-  final List<String> titles = ["Home", "Student Profile"];
+  final List<String> titles = ["Profile Card", "Student Profile"];
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'PROFILE'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'PROFILE'),
         ],
       ),
