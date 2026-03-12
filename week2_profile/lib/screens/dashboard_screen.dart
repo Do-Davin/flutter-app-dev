@@ -11,7 +11,7 @@ class DashboardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Hello, Student! 👋",
+            "Welcome, Davin! 👋",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           Text(
@@ -51,8 +51,7 @@ class DashboardScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Container(
             decoration: BoxDecoration(
-              // color: const Color(0xFFFAFAFA),
-              color: Colors.grey.withOpacity(0.058),
+              color: Colors.grey.withAlpha(20),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -63,14 +62,14 @@ class DashboardScreen extends StatelessWidget {
                   "2 new updates",
                   bgColor: Color(0xFFD2E3FF),
                 ),
-                const Divider(height: 1, indent: 60),
+                const Divider(height: 1, indent: 70, endIndent: 30),
                 _buildListTile(
                   Icons.edit_document,
                   "Assignments",
                   "3 pending",
                   bgColor: Colors.yellowAccent.shade100,
                 ),
-                const Divider(height: 1, indent: 60),
+                const Divider(height: 1, indent: 70, endIndent: 30),
                 _buildListTile(Icons.settings, "Settings", "Profile & prefs"),
               ],
             ),
@@ -85,7 +84,7 @@ class DashboardScreen extends StatelessWidget {
     String title,
     String subtitle,
     Color bgColor,
-    Color iconBgColor,
+    Color borderColor,
     String emoji,
     Color valueColor,
     Color titleColor,
@@ -100,6 +99,7 @@ class DashboardScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: bgColor,
               borderRadius: BorderRadius.circular(20),
+              border: Border.all(width: 2.0, color: borderColor),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +136,7 @@ class DashboardScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               width: 50,
               decoration: BoxDecoration(
-                color: iconBgColor,
+                color: borderColor,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
@@ -165,11 +165,12 @@ class DashboardScreen extends StatelessWidget {
           color: bgColor,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4),
+            BoxShadow(color: Colors.black.withAlpha(50), blurRadius: 4),
           ],
         ),
         child: Icon(icon, color: iconColor),
       ),
+      onTap: () {},
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(subtitle),
       trailing: const Icon(Icons.chevron_right, color: Colors.grey),

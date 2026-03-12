@@ -26,6 +26,15 @@ class ShopScreen extends StatelessWidget {
           bgColor: Colors.lightBlueAccent,
           imagePath: 'assets/images/headphones.png',
         ),
+        const SizedBox(height: 16),
+        _buildProductCard(
+          name: 'Laptop Pro',
+          subtitle: 'Chip M6 Ultra',
+          price: '\$11199',
+          cents: '.99',
+          bgColor: Colors.greenAccent,
+          imagePath: 'assets/images/laptop.png',
+        ),
       ],
     );
   }
