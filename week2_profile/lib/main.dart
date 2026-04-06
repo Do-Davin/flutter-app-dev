@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:week2_profile/screens/main_screen.dart';
+// import 'package:week2_profile/screens/main_screen.dart';
+import 'package:week2_profile/screens/profile_screen.dart';
 import 'package:week2_profile/theme/app_theme.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const MainScreen(),
+      home: const ProfileScreen(),
     );
   }
 }
