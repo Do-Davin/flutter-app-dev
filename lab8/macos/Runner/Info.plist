@@ -26,6 +26,8 @@
 	<string>$(PRODUCT_COPYRIGHT)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app uses the camera for Exercise 3.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses location for Exercise 5 photo coordinates.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import 'models/geo_photo.dart';
 import 'screens/compass_screen.dart';
 import 'screens/exercise1_screen.dart';
 import 'screens/gallery_screen.dart';
-import 'screens/placeholder_exercise_screen.dart';
+import 'screens/geo_gallery_screen.dart';
 import 'screens/selfie_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(GeoPhotoAdapter());
+  await Hive.openBox<GeoPhoto>('photos');
+
   runApp(const Lab8App());
 }
 
@@ -74,8 +81,8 @@ class LabHomeScreen extends StatelessWidget {
           ),
           ExerciseTile(
             title: 'Exercise 5',
-            subtitle: 'Waiting for approval',
-            screen: const PlaceholderExerciseScreen(number: 5),
+            subtitle: 'Geo-Tagged Photo Gallery',
+            screen: const GeoGalleryScreen(),
           ),
         ],
       ),

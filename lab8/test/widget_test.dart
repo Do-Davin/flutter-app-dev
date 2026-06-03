@@ -15,6 +15,7 @@ void main() {
     expect(find.text('Exercise 5'), findsOneWidget);
     expect(find.text('Selfie Camera Mini-App'), findsOneWidget);
     expect(find.text('Live Compass'), findsOneWidget);
+    expect(find.text('Geo-Tagged Photo Gallery'), findsOneWidget);
   });
 
   testWidgets('expandable card opens and closes', (tester) async {
