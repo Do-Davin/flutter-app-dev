@@ -13,41 +13,66 @@ class GeoGalleryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final box = Hive.box<GeoPhoto>('photos');
-
     return Scaffold(
       appBar: AppBar(title: const Text('Exercise 5')),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _capturePhoto(context, box),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add_a_photo),
-      ),
-      body: ValueListenableBuilder(
-        valueListenable: box.listenable(),
-        builder: (context, Box<GeoPhoto> photos, child) {
-          if (photos.isEmpty) {
-            return const Center(
-              child: Text('No photos yet — tap + to capture'),
-            );
+      body: FutureBuilder<Box<GeoPhoto>>(
+        future: _openPhotosBox(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
           }
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: photos.length,
-            itemBuilder: (context, index) {
-              final photo = photos.getAt(index);
+          final box = snapshot.data!;
 
-              if (photo == null) {
-                return const SizedBox.shrink();
-              }
+          return Stack(
+            children: [
+              ValueListenableBuilder(
+                valueListenable: box.listenable(),
+                builder: (context, Box<GeoPhoto> photos, child) {
+                  if (photos.isEmpty) {
+                    return const Center(
+                      child: Text('No photos yet — tap + to capture'),
+                    );
+                  }
 
-              return GeoPhotoCard(photo: photo, index: index);
-            },
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: photos.length,
+                    itemBuilder: (context, index) {
+                      final photo = photos.getAt(index);
+
+                      if (photo == null) {
+                        return const SizedBox.shrink();
+                      }
+
+                      return GeoPhotoCard(photo: photo, index: index);
+                    },
+                  );
+                },
+              ),
+              Positioned(
+                right: 16,
+                bottom: 16,
+                child: FloatingActionButton(
+                  onPressed: () => _capturePhoto(context, box),
+                  backgroundColor: Colors.indigo,
+                  foregroundColor: Colors.white,
+                  child: const Icon(Icons.add_a_photo),
+                ),
+              ),
+            ],
           );
         },
       ),
     );
+  }
+
+  Future<Box<GeoPhoto>> _openPhotosBox() async {
+    if (Hive.isBoxOpen('photos')) {
+      return Hive.box<GeoPhoto>('photos');
+    }
+
+    return Hive.openBox<GeoPhoto>('photos');
   }
 
   Future<void> _capturePhoto(BuildContext context, Box<GeoPhoto> box) async {
