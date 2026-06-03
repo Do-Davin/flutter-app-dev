@@ -11,8 +11,10 @@ import 'screens/selfie_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(GeoPhotoAdapter());
-  await Hive.openBox<GeoPhoto>('photos');
+
+  if (!Hive.isAdapterRegistered(1)) {
+    Hive.registerAdapter(GeoPhotoAdapter());
+  }
 
   runApp(const Lab8App());
 }

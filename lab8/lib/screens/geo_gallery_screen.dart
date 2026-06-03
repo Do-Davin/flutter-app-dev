@@ -95,10 +95,19 @@ class _GeoGalleryScreenState extends State<GeoGalleryScreen> {
     }
 
     if (Hive.isBoxOpen('photos')) {
-      return Hive.box<GeoPhoto>('photos');
+      try {
+        return Hive.box<GeoPhoto>('photos');
+      } catch (error) {
+        await Hive.box('photos').close();
+      }
     }
 
-    return Hive.openBox<GeoPhoto>('photos');
+    try {
+      return await Hive.openBox<GeoPhoto>('photos');
+    } catch (error) {
+      await Hive.deleteBoxFromDisk('photos');
+      return Hive.openBox<GeoPhoto>('photos');
+    }
   }
 
   Future<void> _capturePhoto(BuildContext context, Box<GeoPhoto> box) async {
