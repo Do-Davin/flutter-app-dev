@@ -20,20 +20,27 @@ class _CompassState extends State<CompassScreen> {
   void initState() {
     super.initState();
 
-    _sub = magnetometerEventStream().listen((event) {
-      final now = DateTime.now();
+    _sub =
+        magnetometerEventStream(
+          samplingPeriod: const Duration(milliseconds: 50),
+        ).listen((event) {
+          final now = DateTime.now();
 
-      if (now.difference(_lastUpdate).inMilliseconds < 50) {
-        return;
-      }
+          if (now.difference(_lastUpdate).inMilliseconds < 50) {
+            return;
+          }
 
-      final heading = math.atan2(event.y, event.x);
+          var heading = -math.atan2(event.x, event.y);
 
-      setState(() {
-        _heading = heading;
-        _lastUpdate = now;
-      });
-    });
+          if (heading < 0) {
+            heading += math.pi * 2;
+          }
+
+          setState(() {
+            _heading = heading;
+            _lastUpdate = now;
+          });
+        });
   }
 
   @override
@@ -44,7 +51,7 @@ class _CompassState extends State<CompassScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final degrees = (_heading * 180 / math.pi).toStringAsFixed(0);
+    final degrees = (_heading * 180 / math.pi).round() % 360;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Exercise 4')),
