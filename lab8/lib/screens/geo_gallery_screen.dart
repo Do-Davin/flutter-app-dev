@@ -8,16 +8,38 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/geo_photo.dart';
 import 'selfie_screen.dart';
 
-class GeoGalleryScreen extends StatelessWidget {
+class GeoGalleryScreen extends StatefulWidget {
   const GeoGalleryScreen({super.key});
+
+  @override
+  State<GeoGalleryScreen> createState() => _GeoGalleryScreenState();
+}
+
+class _GeoGalleryScreenState extends State<GeoGalleryScreen> {
+  late final Future<Box<GeoPhoto>> _photosBoxFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _photosBoxFuture = _openPhotosBox();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Exercise 5')),
       body: FutureBuilder<Box<GeoPhoto>>(
-        future: _openPhotosBox(),
+        future: _photosBoxFuture,
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text('Could not open photo gallery.'),
+              ),
+            );
+          }
+
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -68,6 +90,10 @@ class GeoGalleryScreen extends StatelessWidget {
   }
 
   Future<Box<GeoPhoto>> _openPhotosBox() async {
+    if (!Hive.isAdapterRegistered(1)) {
+      Hive.registerAdapter(GeoPhotoAdapter());
+    }
+
     if (Hive.isBoxOpen('photos')) {
       return Hive.box<GeoPhoto>('photos');
     }
