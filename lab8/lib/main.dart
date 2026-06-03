@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/exercise1_screen.dart';
+import 'screens/gallery_screen.dart';
 import 'screens/placeholder_exercise_screen.dart';
 
 void main() {
@@ -41,8 +42,23 @@ class LabHomeScreen extends StatelessWidget {
           ),
           ExerciseTile(
             title: 'Exercise 2',
-            subtitle: 'Waiting for approval',
-            screen: const PlaceholderExerciseScreen(number: 2),
+            subtitle: 'Hero Image Detail',
+            screen: const GalleryScreen(
+              imageUrls: [
+                'https://picsum.photos/id/10/600/600',
+                'https://picsum.photos/id/11/600/600',
+                'https://picsum.photos/id/12/600/600',
+                'https://picsum.photos/id/13/600/600',
+                'https://picsum.photos/id/14/600/600',
+                'https://picsum.photos/id/15/600/600',
+                'https://picsum.photos/id/16/600/600',
+                'https://picsum.photos/id/17/600/600',
+                'https://picsum.photos/id/18/600/600',
+                'https://picsum.photos/id/19/600/600',
+                'https://picsum.photos/id/20/600/600',
+                'https://picsum.photos/id/21/600/600',
+              ],
+            ),
           ),
           ExerciseTile(
             title: 'Exercise 3',

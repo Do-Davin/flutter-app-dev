@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lab8/main.dart';
+import 'package:lab8/screens/gallery_screen.dart';
 import 'package:lab8/widgets/expandable_card.dart';
 
 void main() {
@@ -46,5 +47,26 @@ void main() {
       find.byType(AnimatedCrossFade),
     );
     expect(crossFade.crossFadeState, CrossFadeState.showFirst);
+  });
+
+  test('gallery screen receives twelve images', () {
+    const imageUrls = [
+      'image-1',
+      'image-2',
+      'image-3',
+      'image-4',
+      'image-5',
+      'image-6',
+      'image-7',
+      'image-8',
+      'image-9',
+      'image-10',
+      'image-11',
+      'image-12',
+    ];
+
+    const screen = GalleryScreen(imageUrls: imageUrls);
+
+    expect(screen.imageUrls.length, 12);
   });
 }
