@@ -13,6 +13,8 @@ void main() {
     expect(find.text('Exercise 3'), findsOneWidget);
     expect(find.text('Exercise 4'), findsOneWidget);
     expect(find.text('Exercise 5'), findsOneWidget);
+    expect(find.text('Selfie Camera Mini-App'), findsOneWidget);
+    expect(find.text('Live Compass'), findsOneWidget);
   });
 
   testWidgets('expandable card opens and closes', (tester) async {

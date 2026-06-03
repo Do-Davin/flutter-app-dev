@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'screens/compass_screen.dart';
 import 'screens/exercise1_screen.dart';
 import 'screens/gallery_screen.dart';
 import 'screens/placeholder_exercise_screen.dart';
+import 'screens/selfie_screen.dart';
 
 void main() {
   runApp(const Lab8App());
@@ -62,13 +64,13 @@ class LabHomeScreen extends StatelessWidget {
           ),
           ExerciseTile(
             title: 'Exercise 3',
-            subtitle: 'Waiting for approval',
-            screen: const PlaceholderExerciseScreen(number: 3),
+            subtitle: 'Selfie Camera Mini-App',
+            screen: const SelfieScreen(),
           ),
           ExerciseTile(
             title: 'Exercise 4',
-            subtitle: 'Waiting for approval',
-            screen: const PlaceholderExerciseScreen(number: 4),
+            subtitle: 'Live Compass',
+            screen: const CompassScreen(),
           ),
           ExerciseTile(
             title: 'Exercise 5',
